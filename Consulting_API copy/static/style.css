@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+:root {
+  --light-blue: #c0e4f2;
+  --blue: #6cb3d1;
+  --dark-blue: #2a7b9b;
+  --light-green: #c0f2d5;
+  --green: #6cd1a4;
+  --dark-green: #2a9b6e;
+  --white: #ffffff;
+  --light-gray: #f2f2f2;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--light-blue);
+  margin: 0;
+}
+
+h1 {
+  color: var(--dark-blue);
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  margin: 20px auto;
+  width: 300px;
+}
+
+label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: var(--light-gray);
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--green);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+button:hover {
+  background-color: var(--dark-green);
+  transform: scale(1.05);
+}
+
+textarea {
+  resize: none;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+a {
+  display: inline-block;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--dark-blue);
+  margin-top: 1rem;
+  padding: 8px 16px;
+  border: 2px solid var(--dark-blue);
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+a:hover {
+  background-color: var(--dark-blue);
+  color: var(--white);
+}

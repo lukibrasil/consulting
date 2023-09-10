@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+        }
+
+        nav {
+            background-color: #3498db;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            color: white;
+        }
+
+        nav h2 {
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero a {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .hero a:hover {
+            background-color: #2980b9;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h2>Consulting Chatbot</h2>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#cases">Cases</a></li>
+            <li><a href="/build_case">Build Your Own Case</a></li>  <!-- Add this line -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Welcome to the Consulting Chatbot</h1>
+            <a href="first_case">Start First Case</a>
+        </div>
+
+        <div class="section" id="about">
+            <h2>About</h2>
+            <p>Our consulting chatbot leverages the power of AI to help you learn and practice consulting concepts. Whether you're a beginner or an expert, our bot is designed to provide a personalized learning experience.</p>
+        </div>
+
+        <div class="section" id="resources">
+            <h2>Learning Resources</h2>
+            <p>Check out our curated list of learning resources to deepen your understanding of various consulting concepts. Our resources include online courses, books, videos, and articles.</p>
+        </div>
+
+        <div class="section" id="cases">
+            <h2>Cases</h2>
+            <p>Practice makes perfect! Our chatbot offers multiple cases that you can use to practice your consulting skills. Just click on "Start First Case" to begin!</p>
+        </div>
+    </div>
+</body>
+</html>

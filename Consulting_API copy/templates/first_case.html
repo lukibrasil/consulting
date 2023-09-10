@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Nice Chat App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1em;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #chat-container {
+            width: 100%;
+            max-width: 1600px;
+            height: 80%;
+            max-height: 800px;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        #chat {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+            position: relative;  /* Add relative position */
+        }
+        #input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
+        #message {
+            flex-grow: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+        #message:focus {
+            border-color: #007BFF;
+        }
+        #send {
+            width: 80px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #send:hover {
+            background-color: #0056b3;
+        }
+        .loading {
+            display: none;
+            color: #999;
+            position: absolute;  /* Move loading message inside chat container */
+            bottom: 10px;
+            right: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+
+        #start-btn {
+            margin-left: 10px;
+            background-color: white;
+            border: 1px solid #3498db;  /* Add border */
+            color: #3498db;
+            transition: all 0.3s ease-in-out;
+        }
+        #start-btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat" role="log" aria-live="polite">
+            <div class="loading">Bot is typing...</div>  <!-- Move loading message inside chat container -->
+        </div>
+        <div id="input-container">
+            <input type="text" id="message" placeholder="Type your message..." aria-label="message input">
+            <button id="send" aria-label="send message">Send</button>
+            <button id="start-btn">Start Listening</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Start the conversation when the page loads
+            $.get("/start_conversation", function(data) {
+                $("#chat").append("<p><b>Bot:</b> " + data.response + "</p>");
+            });
+
+            $("#send").click(function() {
+                let message = $("#message").val();
+                if (message.trim() !== '') {
+                    $("#chat").append("<p><b>You:</b> " + message + "</p>");
+                    $("#message").val('');
+
+                    $(".loading").show(); // Show loading message
+
+                    $.post("/chat", { message: message }, function(data) {
+                        $(".loading").hide(); // Hide loading message
+                        $("#chat").append("<p><b>Bot:</b> " + data.response + "</p>");
+                        $("#chat").scrollTop($("#chat")[0].scrollHeight);
+                    });
+                }
+            });
+
+            $("#message").keypress(function(e) {
+                if (e.which === 13) {
+                    $("#send").click();
+                }
+            });
+        });
+
+        const recognition = new window.webkitSpeechRecognition();
+        recognition.interimResults = true;
+
+        recognition.addEventListener('result', (e) => {
+            const transcript = Array.from(e.results)
+                .map((result) => result[0])
+                .map((result) => result.transcript)
+                .join('');
+
+            $("#message").val(transcript);
+            if (e.results[0].isFinal) {
+                $("#send").click();
+            }
+        });
+
+        $("#start-btn").click(() => {
+            recognition.start();
+        });
+
+
+    </script>
+</body>
+</html>
